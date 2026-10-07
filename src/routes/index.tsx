@@ -84,7 +84,7 @@ function Index() {
 
   const next = () => {
     if (step === 0) { if (validateBasics()) setStep(1); return; }
-    const q = questions[step - 1];
+    const q = questions[step - 1]!;
     if (!data[q.key]) { setErrors({ [q.key]: "Selecione uma opção" }); return; }
     if (step === TOTAL - 1) submit(); else setStep(step + 1);
   };
@@ -168,7 +168,7 @@ function Index() {
                     </>
                   ) : (
                     (() => {
-                      const q = questions[step - 1];
+                      const q = questions[step - 1]!;
                       return (
                         <>
                           <h2 className="mb-6 text-2xl font-semibold tracking-tight md:text-3xl">{q.title}</h2>
