@@ -249,7 +249,7 @@ function Index() {
             {clients.map((c) => (
               <div key={c.name} className="flex h-28 select-none items-center justify-center overflow-hidden rounded-2xl border bg-card px-4 text-center text-xl font-semibold tracking-tight text-muted-foreground" style={{ fontStretch: "115%" }}>
                 {c.logo ? (
-                  <img src={c.logo.src} alt={c.logo.alt} loading="lazy" className="h-full w-full object-cover" />
+                  <img src={c.logo.src} alt={c.logo.alt} loading="lazy" className="max-h-20 max-w-full object-contain" />
                 ) : (
                   c.name
                 )}
