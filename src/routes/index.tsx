@@ -245,8 +245,12 @@ function Index() {
           <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">Já atendemos empresas do segmento óptico</h2>
           <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {clients.map((c) => (
-              <div key={c} className="flex h-28 select-none items-center justify-center rounded-2xl border bg-card px-4 text-center text-xl font-semibold tracking-tight text-muted-foreground" style={{ fontStretch: "115%" }}>
-                {c}
+              <div key={c.name} className="flex h-28 select-none items-center justify-center overflow-hidden rounded-2xl border bg-card px-4 text-center text-xl font-semibold tracking-tight text-muted-foreground" style={{ fontStretch: "115%" }}>
+                {c.logo ? (
+                  <img src={c.logo.src} alt={c.logo.alt} loading="lazy" className="h-full w-full object-cover" />
+                ) : (
+                  c.name
+                )}
               </div>
             ))}
           </div>
