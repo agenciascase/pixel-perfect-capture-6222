@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo-scase.webp.asset.json";
+import preventLogo from "@/assets/oticas-prevent-wide.jpg.asset.json";
 import { trackOnce } from "@/lib/tracking";
 
 export const Route = createFileRoute("/")({
@@ -37,7 +38,11 @@ const questions: { key: keyof Data; title: string; options: string[] }[] = [
 ];
 const TOTAL = questions.length + 1;
 
-const clients = ["Óticas Prevent", "Ótica Indaiá", "Óticas MM Barra"];
+const clients: { name: string; logo?: { src: string; alt: string } }[] = [
+  { name: "Óticas Prevent", logo: { src: preventLogo.url, alt: "Óticas Prevent" } },
+  { name: "Ótica Indaiá" },
+  { name: "Óticas MM Barra" },
+];
 
 function maskPhone(v: string) {
   const d = v.replace(/\D/g, "").slice(0, 11);
@@ -240,8 +245,12 @@ function Index() {
           <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">Já atendemos empresas do segmento óptico</h2>
           <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {clients.map((c) => (
-              <div key={c} className="flex h-28 select-none items-center justify-center rounded-2xl border bg-card px-4 text-center text-xl font-semibold tracking-tight text-muted-foreground" style={{ fontStretch: "115%" }}>
-                {c}
+              <div key={c.name} className="flex h-28 select-none items-center justify-center overflow-hidden rounded-2xl border bg-card px-4 text-center text-xl font-semibold tracking-tight text-muted-foreground" style={{ fontStretch: "115%" }}>
+                {c.logo ? (
+                  <img src={c.logo.src} alt={c.logo.alt} loading="lazy" className="h-full w-full object-cover" />
+                ) : (
+                  c.name
+                )}
               </div>
             ))}
           </div>
