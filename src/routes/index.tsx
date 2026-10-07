@@ -53,12 +53,34 @@ function maskPhone(v: string) {
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
 }
 
+const WHATSAPP_URL = `https://wa.me/5514991527687?text=${encodeURIComponent("Olá! Quero agendar uma reunião com a Scase.")}`;
+const SLOTS = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
+
+function nextBusinessDays(n: number) {
+  const days: { label: string; weekday: string }[] = [];
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  while (days.length < n) {
+    const wd = d.getDay();
+    if (wd !== 0 && wd !== 6) {
+      days.push({
+        label: d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }).replace(".", ""),
+        weekday: d.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", ""),
+      });
+    }
+    d.setDate(d.getDate() + 1);
+  }
+  return days;
+}
+
 function Index() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<Data>(empty);
   const [errors, setErrors] = useState<Partial<Record<keyof Data, string>>>({});
   const [phase, setPhase] = useState<"form" | "schedule" | "done">("form");
   const [sending, setSending] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(0);
+  const [selectedSlot, setSelectedSlot] = useState("");
 
   const set = (k: keyof Data, v: string) => { setData((d) => ({ ...d, [k]: v })); setErrors((e) => ({ ...e, [k]: undefined })); };
 
