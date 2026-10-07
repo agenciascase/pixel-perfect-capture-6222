@@ -116,7 +116,7 @@ function Index() {
         <section className="mx-auto max-w-6xl px-5 pb-16 pt-10 md:pb-24 md:pt-20">
           <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-primary">● Óticas e redes de óticas</p>
           <h1 className="max-w-4xl text-5xl font-semibold leading-[0.95] tracking-tight md:text-8xl" style={{ fontStretch: "110%" }}>
-            Marketing para óticas que querem <span className="text-primary">crescer.</span>
+            Marketing para óticas que as vendas estagnaram.
           </h1>
           <p className="mt-8 max-w-xl text-lg text-muted-foreground">
             Conte um pouco sobre sua operação e descubra como a Scase pode ajudar sua ótica ou rede a melhorar seus resultados.
