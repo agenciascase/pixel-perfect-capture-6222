@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo-scase.webp.asset.json";
-import preventLogo from "@/assets/oticas-prevent-wide.jpg.asset.json";
+import preventLogo from "@/assets/logo-prevent.png.asset.json";
+import indaiaLogo from "@/assets/logo-indaia.png.asset.json";
+import mmLogo from "@/assets/logo-mm.png.asset.json";
 import { trackOnce } from "@/lib/tracking";
 
 export const Route = createFileRoute("/")({
@@ -40,8 +42,8 @@ const TOTAL = questions.length + 1;
 
 const clients: { name: string; logo?: { src: string; alt: string } }[] = [
   { name: "Óticas Prevent", logo: { src: preventLogo.url, alt: "Óticas Prevent" } },
-  { name: "Ótica Indaiá" },
-  { name: "Óticas MM Barra" },
+  { name: "Ótica Indaiá", logo: { src: indaiaLogo.url, alt: "Ótica Indaiá" } },
+  { name: "Óticas MM Barra", logo: { src: mmLogo.url, alt: "Óticas MM Barra" } },
 ];
 
 function maskPhone(v: string) {
