@@ -122,7 +122,7 @@ function Index() {
             Conte um pouco sobre sua operação e descubra como a Scase pode ajudar sua ótica ou rede a melhorar seus resultados.
           </p>
           <a href="#formulario" className="mt-10 inline-flex h-14 items-center gap-3 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground transition-transform hover:scale-[1.02]">
-            Quero falar com a Scase <span aria-hidden>→</span>
+            Quero aumentar minhas vendas <span aria-hidden>→</span>
           </a>
         </section>
 
