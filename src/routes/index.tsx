@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo-scase.webp.asset.json";
-import preventLogo from "@/assets/oticas-prevent.jpg.asset.json";
+import preventLogo from "@/assets/oticas-prevent-wide.jpg.asset.json";
 import { trackOnce } from "@/lib/tracking";
 
 export const Route = createFileRoute("/")({
