@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import heroImg from "@/assets/hero-oticas.jpg";
 import logo from "@/assets/logo-scase.webp.asset.json";
 import preventLogo from "@/assets/logo-prevent.png.asset.json";
 import indaiaLogo from "@/assets/logo-indaia.png.asset.json";
@@ -136,12 +137,15 @@ function Index() {
 
   return (
     <div className="min-h-screen">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-5 py-6">
+      <div className="relative">
+        <img src={heroImg} alt="" aria-hidden="true" width={1600} height={900} className="pointer-events-none absolute inset-x-0 top-0 h-[520px] w-full object-cover md:h-[760px]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[520px] w-full bg-gradient-to-b from-background/65 via-background/80 to-background md:h-[760px]" />
+        <header className="relative mx-auto flex max-w-6xl items-center justify-between px-5 py-6">
         <img src={logo.url} alt="Scase" className="h-7 w-auto" />
         <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Para óticas</span>
       </header>
 
-      <main>
+      <main className="relative">
         <section className="mx-auto max-w-6xl px-5 pb-16 pt-10 md:pb-24 md:pt-20">
           <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-primary">● Óticas e redes de óticas</p>
           <h1 className="max-w-4xl text-5xl font-semibold leading-[0.95] tracking-tight md:text-8xl" style={{ fontStretch: "110%" }}>
@@ -347,6 +351,7 @@ function Index() {
           </div>
         </section>
       </main>
+      </div>
 
       <footer className="border-t">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-sm text-muted-foreground sm:flex-row">
