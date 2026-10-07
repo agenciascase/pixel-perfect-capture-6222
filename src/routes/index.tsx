@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-oticas.jpg";
 import logo from "@/assets/logo-scase.webp.asset.json";
@@ -238,6 +238,13 @@ function Index() {
                     {step === TOTAL - 1 ? (sending ? "Enviando..." : "Enviar") : "Continuar"}
                   </button>
                 </div>
+                <p className="mt-4 text-center text-xs leading-relaxed text-paper-foreground/50">
+                  Ao enviar, você concorda com a{" "}
+                  <Link to="/politica-de-privacidade" className="underline underline-offset-2 transition-colors hover:text-paper-foreground">
+                    Política de Privacidade
+                  </Link>{" "}
+                  da Scase. Seus dados servem apenas para conversar com você sobre marketing.
+                </p>
               </>
             )}
 
@@ -356,7 +363,12 @@ function Index() {
       <footer className="border-t">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-sm text-muted-foreground sm:flex-row">
           <img src={logo.url} alt="Scase" className="h-5 w-auto opacity-80" />
-          <span>© {new Date().getFullYear()} Scase. Todos os direitos reservados.</span>
+          <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-6">
+            <Link to="/politica-de-privacidade" className="transition-colors hover:text-primary">
+              Política de Privacidade
+            </Link>
+            <span>© {new Date().getFullYear()} Scase. Todos os direitos reservados.</span>
+          </div>
         </div>
       </footer>
     </div>
