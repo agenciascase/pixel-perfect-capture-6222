@@ -18,9 +18,9 @@ export const Route = createFileRoute("/")({
 });
 
 // Configure the real scheduling tool (Calendly or Cal.com link) via VITE_SCHEDULING_URL.
-const SCHEDULING_URL: string = import.meta.env.VITE_SCHEDULING_URL ?? "";
+const SCHEDULING_URL: string = import.meta.env['VITE_SCHEDULING_URL'] ?? "";
 // Optional endpoint (e.g. CRM/Zapier/Make webhook) that receives each lead as JSON.
-const LEAD_WEBHOOK_URL: string = import.meta.env.VITE_LEAD_WEBHOOK_URL ?? "";
+const LEAD_WEBHOOK_URL: string = import.meta.env['VITE_LEAD_WEBHOOK_URL'] ?? "";
 
 type Data = {
   nome: string; empresa: string; email: string; telefone: string;
