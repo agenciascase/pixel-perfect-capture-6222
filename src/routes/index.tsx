@@ -37,8 +37,6 @@ const questions: { key: keyof Data; title: string; options: string[] }[] = [
 ];
 const TOTAL = questions.length + 1;
 
-import preventLogo from "@/assets/oticas-prevent.jpg.asset.json";
-
 const clients: { name: string; logo?: { src: string; alt: string } }[] = [
   { name: "Óticas Prevent", logo: { src: preventLogo.url, alt: "Óticas Prevent" } },
   { name: "Ótica Indaiá" },
