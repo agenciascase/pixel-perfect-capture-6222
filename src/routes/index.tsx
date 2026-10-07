@@ -240,17 +240,71 @@ function Index() {
             {phase === "schedule" && (
               <div className="step-in">
                 <p className="font-mono text-xs uppercase tracking-widest text-primary-foreground/60">✓ Recebemos suas informações.</p>
-                <p className="mt-2 text-muted-foreground">Agora escolha um horário para conversar com nossa equipe.</p>
                 <h2 className="mt-8 text-3xl font-semibold tracking-tight">Agende sua reunião</h2>
                 <p className="mt-2 opacity-70">Escolha o melhor horário para conversar com nossa equipe.</p>
-                <div className="mt-6 overflow-hidden rounded-xl border border-paper-foreground/10">
+                <div className="mt-6 rounded-xl border border-paper-foreground/10 p-4 md:p-6">
                   {scheduleSrc ? (
                     <iframe title="Agendamento Scase" src={scheduleSrc} className="h-[680px] w-full" />
                   ) : (
-                    <div className="p-8 text-center opacity-70">
-                      A agenda online estará disponível em breve. Nossa equipe entrará em contato pelo WhatsApp informado para marcar a reunião.
-                    </div>
+                    (() => {
+                      const days = nextBusinessDays(5);
+                      return (
+                        <>
+                          <div className="flex gap-2 overflow-x-auto pb-1">
+                            {days.map((d, i) => {
+                              const active = selectedDay === i;
+                              return (
+                                <button
+                                  key={d.label}
+                                  type="button"
+                                  onClick={() => { setSelectedDay(i); setSelectedSlot(""); }}
+                                  className={`flex min-h-16 min-w-20 flex-1 flex-col items-center justify-center rounded-xl border px-3 py-2 text-center transition-colors ${active ? "border-paper-foreground bg-paper-foreground text-paper" : "border-paper-foreground/15 hover:border-paper-foreground/50"}`}
+                                >
+                                  <span className="font-mono text-[11px] uppercase tracking-widest opacity-70">{d.weekday}</span>
+                                  <span className="text-base font-semibold">{d.label}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                          <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+                            {SLOTS.map((s) => {
+                              const active = selectedSlot === s;
+                              return (
+                                <button
+                                  key={s}
+                                  type="button"
+                                  onClick={() => setSelectedSlot(s)}
+                                  className={`flex min-h-12 items-center justify-center rounded-xl border text-base transition-colors ${active ? "border-paper-foreground bg-paper-foreground text-paper" : "border-paper-foreground/15 hover:border-paper-foreground/50"}`}
+                                >
+                                  {s}
+                                </button>
+                              );
+                            })}
+                          </div>
+                          <button
+                            type="button"
+                            disabled={!selectedSlot}
+                            onClick={() => { trackOnce("Schedule"); setPhase("done"); }}
+                            className="mt-5 h-14 w-full rounded-full bg-paper-foreground font-semibold text-paper transition-opacity disabled:opacity-40"
+                          >
+                            Confirmar horário
+                          </button>
+                        </>
+                      );
+                    })()
                   )}
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 flex h-14 w-full items-center justify-center gap-3 rounded-full border border-paper-foreground/20 font-mono text-sm uppercase tracking-[0.2em] transition-colors hover:border-paper-foreground/60"
+                  >
+                    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden>
+                      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.7.9-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4 0-.5.2-.7l.4-.5c.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.7.3a2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1 2.7 11.4 11.4 0 0 0 4.4 3.9 5 5 0 0 0 2.8.6 2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.2-.2-.3-.5-.4Z" />
+                    </svg>
+                    Enviar mensagem
+                  </a>
+                  <p className="mt-3 text-center text-sm opacity-60">Prefere falar agora? Chame a Scase no WhatsApp.</p>
                 </div>
               </div>
             )}
@@ -259,7 +313,20 @@ function Index() {
               <div className="step-in py-8 text-center">
                 <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl text-primary-foreground">✓</div>
                 <h2 className="text-3xl font-semibold tracking-tight">Reunião agendada com sucesso!</h2>
+                {selectedSlot && (
+                  <p className="mt-3 font-mono text-sm uppercase tracking-widest text-primary">
+                    {nextBusinessDays(5)[selectedDay]?.weekday} {nextBusinessDays(5)[selectedDay]?.label} · {selectedSlot}
+                  </p>
+                )}
                 <p className="mx-auto mt-3 max-w-md opacity-70">Os detalhes da reunião serão enviados para o e-mail e WhatsApp informados.</p>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex h-14 items-center justify-center gap-3 rounded-full border border-paper-foreground/20 px-8 font-mono text-sm uppercase tracking-[0.2em] transition-colors hover:border-paper-foreground/60"
+                >
+                  Enviar mensagem
+                </a>
               </div>
             )}
           </div>
